@@ -21,7 +21,7 @@ module Backup
   STORAGES    = ['S3', 'CloudFiles', 'Ninefold', 'Dropbox', 'FTP', 'SFTP', 'SCP', 'RSync', 'Local']
   COMPRESSORS = ['Gzip', 'Bzip2', 'Lzma']
   ENCRYPTORS  = ['OpenSSL', 'GPG']
-  SYNCERS     = ['RSync', 'InverseRSync', 'S3']
+  SYNCERS     = ['RSync', 'InverseRSync', 'S3', 'SVNSync']
   NOTIFIERS   = ['Mail', 'Twitter', 'Campfire', 'Presently']
 
   ##
@@ -100,6 +100,7 @@ module Backup
       autoload :RSync,        File.join(CONFIGURATION_PATH, 'syncer', 'rsync')
       autoload :InverseRSync, File.join(CONFIGURATION_PATH, 'syncer', 'inverse_rsync')
       autoload :S3,           File.join(CONFIGURATION_PATH, 'syncer', 's3')
+      autoload :SVNSync,      File.join(CONFIGURATION_PATH, 'syncer', 'svnsync')
     end
 
     module Database
@@ -134,6 +135,7 @@ module Backup
     autoload :RSync,        File.join(SYNCER_PATH, 'rsync')
     autoload :InverseRSync, File.join(SYNCER_PATH, 'inverse_rsync')
     autoload :S3,           File.join(SYNCER_PATH, 's3')
+    autoload :SVNSync,      File.join(SYNCER_PATH, 'svnsync')
   end
 
   ##
