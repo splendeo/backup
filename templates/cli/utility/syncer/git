@@ -1,0 +1,23 @@
+  ##
+  # Git [Syncer]
+  #
+  #  This mirrors a remote git repository
+  #
+  # Notes about usage:
+  #
+  #  The backup must be performed on the server in which the final data is stored.
+  #  In other words, this is not a PUSH-type backup, but a PULL one.
+  #
+  # Requirements:
+  #
+  #  git must be accessible from the command line.
+  #  The account performing the backup must be able to access the remote repository.
+
+  sync_with Git do |git|
+    git.protocol     = "git" # Could also be "http" or "https"
+    git.port         = 9418  # Could also be 80, 443, or a custom one
+    git.username     = "peter"
+    git.host         = "git.example.com"
+    git.repo_path    = "/project-1.git" # the path in the host ( git.example.com/project-1.git )
+    git.path         = "/home/backup/git/project-1"  # the path where the repo is stored locally
+  end
