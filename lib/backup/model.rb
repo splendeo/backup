@@ -126,15 +126,15 @@ module Backup
     def sync_with(name, &block)
       ##
       # Warn user of DSL change from 'RSync' to 'RSync::Local'
-      if name.to_s == 'Backup::Configuration::RSync'
+      if name.to_s == 'Backup::Config::RSync'
         Logger.warn Errors::ConfigError.new(<<-EOS)
-          Configuration Update Needed for Syncer::RSync
+          Config Update Needed for Syncer::RSync
           The RSync Syncer has been split into three separate modules:
           RSync::Local, RSync::Push and RSync::Pull
           Please update your configuration for your local RSync Syncer
           from 'sync_with RSync do ...' to 'sync_with RSync::Local do ...'
         EOS
-        name = Backup::Configuration::RSync::Local
+        name = Backup::Config::RSync::Local
       end
       @syncers << get_class_from_scope(Syncer, name).new(&block)
     end
@@ -322,7 +322,7 @@ module Backup
     # +name+ may be Class/Module or String representation
     # of any namespace which exists under +scope+.
     #
-    # The 'Backup::Configuration::' namespace is stripped from +name+,
+    # The 'Backup::Config::' namespace is stripped from +name+,
     # since this is the namespace where we define module namespaces
     # for use with Model's DSL methods.
     #
@@ -330,12 +330,12 @@ module Backup
     #   get_class_from_scope(Backup::Database, 'MySQL')
     #     returns the class Backup::Database::MySQL
     #
-    #   get_class_from_scope(Backup::Syncer, Backup::Configuration::RSync::Local)
+    #   get_class_from_scope(Backup::Syncer, Backup::Config::RSync::Local)
     #     returns the class Backup::Syncer::RSync::Local
     #
     def get_class_from_scope(scope, name)
       klass = scope
-      name = name.to_s.sub(/^Backup::Configuration::/, '')
+      name = name.to_s.sub(/^Backup::Config::/, '')
       name.split('::').each do |chunk|
         klass = klass.const_get(chunk)
       end

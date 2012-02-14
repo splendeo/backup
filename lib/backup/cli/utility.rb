@@ -78,9 +78,9 @@ module Backup
           Logger.clear!
         end
 
-      rescue => err
-        Logger.error Errors::CLIError.wrap(err)
-        exit(1)
+#      rescue => err
+#        Logger.error Errors::CLIError.wrap(err)
+#        exit(1)
       end
 
       ##

@@ -111,7 +111,7 @@ module Backup
             # Encryptors
             ['OpenSSL', 'GPG'],
             # Syncers
-            ['Rackspace', 'S3', { 'RSync' => ['Push', 'Pull', 'Local'] }, 'SVNSync', 'Git'],
+            ['Rackspace', 'S3', 'SVNSync', 'Git', { 'RSync' => ['Push', 'Pull', 'Local'] }],
             # Notifiers
             ['Mail', 'Twitter', 'Campfire', 'Presently', 'Prowl', 'Hipchat']
           ]
