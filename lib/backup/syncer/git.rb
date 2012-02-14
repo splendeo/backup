@@ -4,7 +4,7 @@ module Backup
   module Syncer
     class Git < Base
 
-      attr_accessor :username, :host, :protocol, :port, :repo_path, :path
+      attr_accessor :username, :password, :host, :protocol, :port, :repo_path, :path
 
       def initialize(&block)
         load_defaults!
@@ -13,7 +13,9 @@ module Backup
       end
 
       def url
-        "#{protocol}://#{username}@#{host}:#{port}#{repo_path}"
+        port_with_preffix = port ? ":#{port}" : ""
+        credentials = username && password ? "#{username}:#{password}@" : ""
+        url = "#{protocol}://#{credentials}#{host}#{port_with_preffix}#{repo_path}"
       end
 
       def local_repository_exists?

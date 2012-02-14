@@ -6,6 +6,7 @@ describe Backup::Syncer::Git do
   let(:git) do
     Backup::Syncer::Git.new do |git|
       git.username  = 'username'
+      git.password  = 'secret'
       git.host      = 'example.com'
       git.protocol  = 'git'
       git.port      = 9418
@@ -15,12 +16,13 @@ describe Backup::Syncer::Git do
   end
 
   before do
-    #Backup::Syncer::Git.clear_defaults!
+    Backup::Configuration::Syncer::Git.clear_defaults!
 
   end
 
   it "should have defined the configuration properly" do
     git.username.should  == 'username'
+    git.password.should  == 'secret'
     git.host.should      == 'example.com'
     git.protocol.should  == 'git'
     git.port.should      == 9418
@@ -33,6 +35,7 @@ describe Backup::Syncer::Git do
   it 'should use the defaults if a particular attribute has not been defined' do
     Backup::Configuration::Syncer::Git.defaults do |git|
       git.username  = 'my_default_username'
+      git.password  = 'my_default_password'
       git.host      = 'my_default_host.com'
       git.repo_path = '/my/default/repo/path'
       git.path      = '/home/jimmy/backups'
@@ -43,6 +46,7 @@ describe Backup::Syncer::Git do
     end
 
     git.username.should == 'my_default_username'
+    git.password.should == 'my_default_password'
     git.host.should     == 'my_default_host.com'
     git.repo_path       == '/my/default/repo/path'
     git.path            == '/home/jimmy/backups'
@@ -52,7 +56,22 @@ describe Backup::Syncer::Git do
 
   describe '#url' do
     it "gets calculated using protocol, host, port and path" do
-      git.url.should == "git://username@example.com:9418/my/repo.git"
+      git.url.should == "git://username:secret@example.com:9418/my/repo.git"
+    end
+   
+    it "ignores missing port successfully" do
+      git.port = nil
+      git.url.should == "git://username:secret@example.com/my/repo.git"
+    end
+   
+    it "ignores missing user successfully" do
+      git.username = nil
+      git.url.should == "git://example.com:9418/my/repo.git"
+    end
+
+    it "ignores missing password successfully" do
+      git.password = nil
+      git.url.should == "git://example.com:9418/my/repo.git"
     end
   end
 
@@ -86,7 +105,7 @@ describe Backup::Syncer::Git do
 
     it 'logs and calls git fetch without initializing the repo, if it already exists' do
       git.stubs(:local_repository_exists?).returns true
-      Backup::Logger.expects(:message).with("Backup::Syncer::Git started syncing 'git://username@example.com:9418/my/repo.git'.")
+      Backup::Logger.expects(:message).with("Backup::Syncer::Git started syncing 'git://username:secret@example.com:9418/my/repo.git'.")
       Backup::Logger.expects(:message).with("Syncing with remote repository")
       FileUtils.expects(:mkdir_p).with(git.path)
       git.expects(:run).with("cd ~/backups/my/repo && git fetch origin")

@@ -5,7 +5,7 @@ module Backup
     module Syncer
       class Git < Base
         class << self
-          attr_accessor :protocol, :username, :host, :port, :path, :repo_path
+          attr_accessor :protocol, :username,:password, :host, :port, :path, :repo_path
         end
       end
     end
