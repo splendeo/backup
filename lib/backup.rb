@@ -169,7 +169,9 @@ module Backup
       autoload :SVNSync,    File.join(CONFIGURATION_PATH, 'syncer', 'svnsync')
       autoload :Git,        File.join(CONFIGURATION_PATH, 'syncer', 'git')
       module Repositories
-        autoload :Base,  File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'base')
+        autoload :Base,    File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'base')
+        autoload :Git,     File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'git')
+        autoload :SVNSync, File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'svnsync')
       end
       module RSync
         autoload :Base,  File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'base')
