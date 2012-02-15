@@ -7,7 +7,7 @@ module Backup
         class Base < Syncer::Base
           class << self
 
-            attr_accessor :protocol, :username, :password, :ip, :port, :path
+            attr_accessor :protocol, :username, :password, :ip, :port, :path, :additional_options
 
           end
         end

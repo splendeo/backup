@@ -4,14 +4,16 @@ require File.expand_path('../../../../spec_helper.rb', __FILE__)
 
 describe Backup::Configuration::Syncer::Repositories do
   before do
-    Backup::Configuration::Syncer::Repositories::Base.defaults do |base|
-      base.protocol   = 'http'
-      base.username   = 'my_user_name'
-      base.password   = 'secret'
-      base.ip         = 'example.com'
-      base.port       = 1234
-      base.path       = '~/backups/'
+    Backup::Configuration::Syncer::Repositories::Base.defaults do |default|
+      default.protocol           = 'http'
+      default.username           = 'my_user_name'
+      default.password           = 'secret'
+      default.ip                 = 'example.com'
+      default.port               = 1234
+      default.path               = '~/backups/'
+      default.additional_options = 'some_additional_options'
       # base.directories/repositories # can not have a default value
+
     end
   end
 
@@ -19,12 +21,13 @@ describe Backup::Configuration::Syncer::Repositories do
 
   it 'should set the default base configuration' do
     base = Backup::Configuration::Syncer::Repositories::Base
-    base.protocol.should == 'http'
-    base.username.should == 'my_user_name'
-    base.password.should == 'secret'
-    base.ip.should       == 'example.com'
-    base.port.should     == 1234
-    base.path.should     == '~/backups/'
+    base.protocol.should    == 'http'
+    base.username.should    == 'my_user_name'
+    base.password.should    == 'secret'
+    base.ip.should          == 'example.com'
+    base.port.should        == 1234
+    base.path.should        == '~/backups/'
+    base.additional_options == 'some_additional_options'
   end
 
   describe '#clear_defaults!' do
@@ -32,12 +35,13 @@ describe Backup::Configuration::Syncer::Repositories do
       Backup::Configuration::Syncer::Repositories::Base.clear_defaults!
 
       base = Backup::Configuration::Syncer::Repositories::Base
-      base.protocol.should == nil
-      base.username.should == nil
-      base.password.should == nil
-      base.ip.should       == nil
-      base.port.should     == nil
-      base.path.should     == nil
+      base.protocol.should    == nil
+      base.username.should    == nil
+      base.password.should    == nil
+      base.ip.should          == nil
+      base.port.should        == nil
+      base.path.should        == nil
+      base.additional_options == nil
     end
   end
 

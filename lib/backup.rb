@@ -74,6 +74,11 @@ module Backup
       autoload :Push,  File.join(SYNCER_PATH, 'rsync', 'push')
       autoload :Pull,  File.join(SYNCER_PATH, 'rsync', 'pull')
     end
+    module Repositories
+      autoload :Base,    File.join(SYNCER_PATH, 'repositories', 'base')
+      autoload :Git,     File.join(SYNCER_PATH, 'repositories', 'git')
+      autoload :SVNSync, File.join(SYNCER_PATH, 'repositories', 'svnsync')
+    end
   end
 
   ##
