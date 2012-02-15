@@ -4,7 +4,7 @@ module Backup
   module Configuration
     module Syncer
       module Repositories
-        class SVNSync < Base
+        class SVN < Base
         end
       end
     end

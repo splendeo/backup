@@ -66,7 +66,7 @@ module Backup
     autoload :Cloud,      File.join(SYNCER_PATH, 'cloud')
     autoload :CloudFiles, File.join(SYNCER_PATH, 'cloud_files')
     autoload :S3,         File.join(SYNCER_PATH, 's3')
-    autoload :SVNSync,    File.join(SYNCER_PATH, 'svnsync')
+    autoload :SVN,    File.join(SYNCER_PATH, 'svn')
     autoload :Git,        File.join(SYNCER_PATH, 'git')
     module RSync
       autoload :Base,  File.join(SYNCER_PATH, 'rsync', 'base')
@@ -77,7 +77,7 @@ module Backup
     module Repositories
       autoload :Base,    File.join(SYNCER_PATH, 'repositories', 'base')
       autoload :Git,     File.join(SYNCER_PATH, 'repositories', 'git')
-      autoload :SVNSync, File.join(SYNCER_PATH, 'repositories', 'svnsync')
+      autoload :SVN, File.join(SYNCER_PATH, 'repositories', 'svn')
     end
   end
 
@@ -171,12 +171,12 @@ module Backup
       autoload :Cloud,      File.join(CONFIGURATION_PATH, 'syncer', 'cloud')
       autoload :CloudFiles, File.join(CONFIGURATION_PATH, 'syncer', 'cloud_files')
       autoload :S3,         File.join(CONFIGURATION_PATH, 'syncer', 's3')
-      autoload :SVNSync,    File.join(CONFIGURATION_PATH, 'syncer', 'svnsync')
+      autoload :SVN,    File.join(CONFIGURATION_PATH, 'syncer', 'svn')
       autoload :Git,        File.join(CONFIGURATION_PATH, 'syncer', 'git')
       module Repositories
         autoload :Base,    File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'base')
         autoload :Git,     File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'git')
-        autoload :SVNSync, File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'svnsync')
+        autoload :SVN, File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'svn')
       end
       module RSync
         autoload :Base,  File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'base')

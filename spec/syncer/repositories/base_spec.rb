@@ -49,7 +49,7 @@ describe Backup::Syncer::Repositories::Base do
           add '/a/new/repo.git'
           add '/another/new/repo.git'
         end
-        syncer.directories.should == [
+        syncer.repositories.should == [
           '/some/repo.git',
           '/a/svn/repo',
           '/a/new/repo.git',
@@ -103,6 +103,12 @@ describe Backup::Syncer::Repositories::Base do
       end
     end
 
+    describe "#repository_url" do
+      it "given a repository, it returns the local path where it will be stored" do
+        syncer.repository_url('/my/repo.git').should == "http://jimmy:secret@example.com:80/my/repo.git"
+      end
+    end
+
     describe "#repository_urls" do
       it "returns the repositories prefixed with the authority" do
         syncer.repositories do
@@ -115,7 +121,57 @@ describe Backup::Syncer::Repositories::Base do
         ]
       end
     end
+  end
 
+  describe "#repository_local_path" do
+    it "returns the path of a given repository" do
+      syncer.repository_local_path("/my/repo.git").should == "backups/my/repo.git"
+    end
+  end
+
+  describe "#repository_absolute_local_path" do
+    it "returns the absolute path of a given repository" do
+      result = "/home/jimmy/backups/my/repo"
+      File.expects(:absolute_path).with("backups/my/repo").returns(result)
+      syncer.repository_absolute_local_path("/my/repo").should == result
+    end
+  end
+
+  describe "#repository_local_container_path" do
+    it "returns the path of the directory that will contain the repo locally" do
+      syncer.repository_local_container_path("/my/deep/repo.git").should == "backups/my/deep"
+    end
+  end
+
+  describe "#create_repository_local_container" do
+    it "creates the container if needed" do
+      FileUtils.stubs(:mkdir_p)
+      FileUtils.expects(:mkdir_p).with("backups/my/deep")
+      syncer.create_repository_local_container("/my/deep/repo.git")
+    end
+  end
+
+  describe "#perform!" do
+    it "invokes update_repository once per each repository" do
+      syncer.stubs(:backup_repository!)
+
+      syncer.repositories do
+        add '/my/repo.git'
+        add '/my/other/repo.git'
+      end
+
+      Backup::Logger.expects(:message).with("Backup::Syncer::Repositories::Base started syncing 'backups'.")
+      syncer.expects(:backup_repository!).with('/my/repo.git')
+      syncer.expects(:backup_repository!).with('/my/other/repo.git')
+
+      syncer.perform!
+    end
+  end
+
+  describe "#backup_repository!" do
+    it "throws an error when invoked" do
+      lambda { syncer.backup_repository('my/repo.git') }.should raise_error
+    end
   end
 
 end
