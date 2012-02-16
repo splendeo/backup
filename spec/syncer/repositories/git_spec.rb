@@ -44,7 +44,7 @@ describe Backup::Syncer::Repositories::Git do
   describe '#clone_repository!' do
     it 'initializes an empty repository' do
       Backup::Logger.expects(:message).with("Cloning repository in 'backups/my/repo.git'.")
-      git.expects(:create_repository_local_container).with('/my/repo.git')
+      git.expects(:create_repository_local_container!).with('/my/repo.git')
       git.expects(:run).with("cd backups/my && git clone --bare git://example.com/my/repo.git")
 
       git.clone_repository!('/my/repo.git')

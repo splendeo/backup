@@ -26,7 +26,7 @@ module Backup
 
         def clone_repository!(repository)
           Logger.message("Cloning repository in '#{repository_local_path(repository)}'.")
-          create_repository_local_container(repository)
+          create_repository_local_container!(repository)
           run "cd #{repository_local_container_path(repository)} && git clone --bare #{repository_url(repository)}"
         end
 

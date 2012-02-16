@@ -29,7 +29,7 @@ module Backup
 
           Logger.message("Initializing empty svn repository in '#{local_path}'.")
 
-          create_repository_local_container(repository)
+          create_repository_local_container!(repository)
 
           run "svnadmin create '#{local_path}'"
           run "echo '#!/bin/sh' > '#{hook_path}'"

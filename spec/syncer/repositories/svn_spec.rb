@@ -68,7 +68,7 @@ describe Backup::Syncer::Repositories::SVN do
 
       svn.expects(:repository_absolute_local_path).with('/my/repo').returns(absolute_path)
 
-      svn.expects(:create_repository_local_container).with('/my/repo')
+      svn.expects(:create_repository_local_container!).with('/my/repo')
 
       svn.expects(:run).with("svnadmin create 'backups/my/repo'")
       svn.expects(:run).with("echo '#!/bin/sh' > 'backups/my/repo/hooks/pre-revprop-change'")

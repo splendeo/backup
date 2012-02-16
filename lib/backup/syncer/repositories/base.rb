@@ -62,7 +62,7 @@ module Backup
           File.dirname(repository_local_path(repository)) 
         end
 
-        def create_repository_local_container(repository)
+        def create_repository_local_container!(repository)
           FileUtils.mkdir_p(repository_local_container_path(repository))
         end
 

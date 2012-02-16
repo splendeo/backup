@@ -143,11 +143,11 @@ describe Backup::Syncer::Repositories::Base do
     end
   end
 
-  describe "#create_repository_local_container" do
+  describe "#create_repository_local_container!" do
     it "creates the container if needed" do
       FileUtils.stubs(:mkdir_p)
       FileUtils.expects(:mkdir_p).with("backups/my/deep")
-      syncer.create_repository_local_container("/my/deep/repo.git")
+      syncer.create_repository_local_container!("/my/deep/repo.git")
     end
   end
 
