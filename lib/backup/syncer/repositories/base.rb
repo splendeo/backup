@@ -12,10 +12,6 @@ module Backup
         attr_accessor :protocol, :username, :password, :ip, :port
 
         ##
-        # Additional options for the CLI
-        attr_accessor :additional_options
-
-        ##
         # repositories is an alias to directories; provided just for clarity
         alias :repositories  :directories
         alias :repositories= :directories=
@@ -28,7 +24,6 @@ module Backup
 
           @path               ||= 'backups'
           @directories          = Array.new
-          @additional_options ||= Array.new
         end
 
         def perform!

@@ -10,7 +10,6 @@ describe Backup::Syncer::Repositories::Base do
     it 'should use default values' do
       syncer.path.should                == 'backups'
       syncer.repositories.should        == []
-      syncer.additional_options.should  == []
     end
 
     context 'when setting configuration defaults' do
@@ -20,12 +19,10 @@ describe Backup::Syncer::Repositories::Base do
         Backup::Configuration::Syncer::Repositories::Base.defaults do |default|
           default.path               = 'some_path'
           #default.directories       = 'cannot_have_a_default_value'
-          default.additional_options = 'some_additional_options'
         end
         syncer = Backup::Syncer::Repositories::Base.new
         syncer.path.should               == 'some_path'
         syncer.repositories.should       == []
-        syncer.additional_options.should == 'some_additional_options'
       end
     end
 

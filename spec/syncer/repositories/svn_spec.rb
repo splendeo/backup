@@ -19,7 +19,6 @@ describe Backup::Syncer::Repositories::SVN do
       svn.protocol                  == 'http'
       svn.path.should               == 'backups'
       svn.repositories.should       == ['/a/repo/trunk', '/another/repo/trunk']
-      svn.additional_options.should == []
     end
   end
 

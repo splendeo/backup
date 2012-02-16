@@ -18,7 +18,6 @@ describe Backup::Syncer::Repositories::Git do
       git.protocol                  == 'git'
       git.path.should               == 'backups'
       git.repositories.should       == ['/a/repo.git', '/another/repo.git']
-      git.additional_options.should == []
     end
   end
 
