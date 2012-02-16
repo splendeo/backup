@@ -18,7 +18,7 @@
     git.port         = 9418  # Optional. Could also be 80, 443, or a custom one
     git.username     = "peter"  # optional
     git.password     = "secret" # optional
-    git.host         = "git.example.com"
+    git.ip           = "git.example.com"
     git.path         = "/home/backup/git" # Defaults to 'backups'. The path where the repos will be stored locally.
     git.repositories do # absolute paths to repositories (git.example.com/project-1.git ...)
       add '/project-1.git'

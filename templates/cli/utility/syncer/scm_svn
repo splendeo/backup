@@ -22,7 +22,7 @@
     svn.port         = 80  # Optional. Could also be 443 (for https), 3690 (for svn) or a custom one
     svn.username     = "peter"  # optional
     svn.password     = "secret" # optional
-    svn.host         = "svn.example.com"
+    svn.ip           = "svn.example.com"
     svn.path         = "/home/backup/svn" # Defaults to 'backups'. The path where the repos will be stored locally.
     svn.repositories do # absolute paths to repositories (svn.example.com/project/trunk ...)
       add '/project/trunk'
