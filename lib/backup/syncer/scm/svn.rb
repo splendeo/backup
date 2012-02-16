@@ -34,7 +34,7 @@ module Backup
           run "svnadmin create '#{local_path}'"
           run "echo '#!/bin/sh' > '#{hook_path}'"
           run "chmod +x '#{hook_path}'"
-          run "svn init file://#{absolute_path} #{url}"
+          run "svnsync init file://#{absolute_path} #{url}"
         end
 
         def update_repository!(repository)
@@ -42,7 +42,7 @@ module Backup
           local_path    = repository_local_path(repository)
 
           Logger.message("Updating svn repository in '#{local_path}'.")
-          run("svn sync file://#{absolute_path} --non-interactive")
+          run("svnsync sync file://#{absolute_path} --non-interactive")
         end
 
 

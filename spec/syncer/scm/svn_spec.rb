@@ -72,7 +72,7 @@ describe Backup::Syncer::SCM::SVN do
       svn.expects(:run).with("svnadmin create 'backups/my/repo'")
       svn.expects(:run).with("echo '#!/bin/sh' > 'backups/my/repo/hooks/pre-revprop-change'")
       svn.expects(:run).with("chmod +x 'backups/my/repo/hooks/pre-revprop-change'")
-      svn.expects(:run).with("svn init file://#{absolute_path} http://example.com/my/repo")
+      svn.expects(:run).with("svnsync init file://#{absolute_path} http://example.com/my/repo")
 
       svn.initialize_repository!('/my/repo')
     end
@@ -85,7 +85,7 @@ describe Backup::Syncer::SCM::SVN do
       Backup::Logger.expects(:message).with("Updating svn repository in 'backups/my/repo'.")
 
       svn.expects(:repository_absolute_local_path).with('/my/repo').returns(absolute_path)
-      svn.expects(:run).with("svn sync file://#{absolute_path} --non-interactive")
+      svn.expects(:run).with("svnsync sync file://#{absolute_path} --non-interactive")
 
       svn.update_repository!('/my/repo')
     end
