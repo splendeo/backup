@@ -3,7 +3,7 @@
 module Backup
   module Configuration
     module Syncer
-      module Repositories
+      module SCM
         class SVN < Base
         end
       end

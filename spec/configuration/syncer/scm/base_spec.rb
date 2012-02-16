@@ -2,9 +2,9 @@
 
 require File.expand_path('../../../../spec_helper.rb', __FILE__)
 
-describe Backup::Configuration::Syncer::Repositories do
+describe Backup::Configuration::Syncer::SCM do
   before do
-    Backup::Configuration::Syncer::Repositories::Base.defaults do |default|
+    Backup::Configuration::Syncer::SCM::Base.defaults do |default|
       default.protocol           = 'http'
       default.username           = 'my_user_name'
       default.password           = 'secret'
@@ -17,10 +17,10 @@ describe Backup::Configuration::Syncer::Repositories do
     end
   end
 
-  after { Backup::Configuration::Syncer::Repositories::Base.clear_defaults! }
+  after { Backup::Configuration::Syncer::SCM::Base.clear_defaults! }
 
   it 'should set the default base configuration' do
-    base = Backup::Configuration::Syncer::Repositories::Base
+    base = Backup::Configuration::Syncer::SCM::Base
     base.protocol.should    == 'http'
     base.username.should    == 'my_user_name'
     base.password.should    == 'secret'
@@ -32,9 +32,9 @@ describe Backup::Configuration::Syncer::Repositories do
 
   describe '#clear_defaults!' do
     it 'should clear all the defaults, resetting them to nil' do
-      Backup::Configuration::Syncer::Repositories::Base.clear_defaults!
+      Backup::Configuration::Syncer::SCM::Base.clear_defaults!
 
-      base = Backup::Configuration::Syncer::Repositories::Base
+      base = Backup::Configuration::Syncer::SCM::Base
       base.protocol.should    == nil
       base.username.should    == nil
       base.password.should    == nil

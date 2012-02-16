@@ -2,7 +2,7 @@
 
 module Backup
   module Syncer
-    module Repositories
+    module SCM
       class SVN < Base
 
         def initialize(&block)

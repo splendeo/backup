@@ -2,7 +2,7 @@
 
 module Backup
   module Syncer
-    module Repositories
+    module SCM
       class Git < Base
 
         attr_accessor :username, :password, :host, :protocol, :port, :repo_path, :path

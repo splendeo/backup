@@ -66,18 +66,16 @@ module Backup
     autoload :Cloud,      File.join(SYNCER_PATH, 'cloud')
     autoload :CloudFiles, File.join(SYNCER_PATH, 'cloud_files')
     autoload :S3,         File.join(SYNCER_PATH, 's3')
-    autoload :SVN,    File.join(SYNCER_PATH, 'svn')
-    autoload :Git,        File.join(SYNCER_PATH, 'git')
     module RSync
       autoload :Base,  File.join(SYNCER_PATH, 'rsync', 'base')
       autoload :Local, File.join(SYNCER_PATH, 'rsync', 'local')
       autoload :Push,  File.join(SYNCER_PATH, 'rsync', 'push')
       autoload :Pull,  File.join(SYNCER_PATH, 'rsync', 'pull')
     end
-    module Repositories
-      autoload :Base,    File.join(SYNCER_PATH, 'repositories', 'base')
-      autoload :Git,     File.join(SYNCER_PATH, 'repositories', 'git')
-      autoload :SVN, File.join(SYNCER_PATH, 'repositories', 'svn')
+    module SCM
+      autoload :Base, File.join(SYNCER_PATH, 'scm', 'base')
+      autoload :Git,  File.join(SYNCER_PATH, 'scm', 'git')
+      autoload :SVN,  File.join(SYNCER_PATH, 'scm', 'svn')
     end
   end
 
@@ -171,18 +169,16 @@ module Backup
       autoload :Cloud,      File.join(CONFIGURATION_PATH, 'syncer', 'cloud')
       autoload :CloudFiles, File.join(CONFIGURATION_PATH, 'syncer', 'cloud_files')
       autoload :S3,         File.join(CONFIGURATION_PATH, 'syncer', 's3')
-      autoload :SVN,    File.join(CONFIGURATION_PATH, 'syncer', 'svn')
-      autoload :Git,        File.join(CONFIGURATION_PATH, 'syncer', 'git')
-      module Repositories
-        autoload :Base,    File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'base')
-        autoload :Git,     File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'git')
-        autoload :SVN, File.join(CONFIGURATION_PATH, 'syncer', 'repositories', 'svn')
+      module SCM
+        autoload :Base,     File.join(CONFIGURATION_PATH, 'syncer', 'scm', 'base')
+        autoload :Git,      File.join(CONFIGURATION_PATH, 'syncer', 'scm', 'git')
+        autoload :SVN,      File.join(CONFIGURATION_PATH, 'syncer', 'scm', 'svn')
       end
       module RSync
-        autoload :Base,  File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'base')
-        autoload :Local, File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'local')
-        autoload :Push,  File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'push')
-        autoload :Pull,  File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'pull')
+        autoload :Base,     File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'base')
+        autoload :Local,    File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'local')
+        autoload :Push,     File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'push')
+        autoload :Pull,     File.join(CONFIGURATION_PATH, 'syncer', 'rsync', 'pull')
       end
     end
 

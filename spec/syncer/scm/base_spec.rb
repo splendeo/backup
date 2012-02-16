@@ -2,8 +2,8 @@
 
 require File.expand_path('../../../spec_helper.rb', __FILE__)
 
-describe Backup::Syncer::Repositories::Base do
-  let(:syncer) { Backup::Syncer::Repositories::Base.new }
+describe Backup::Syncer::SCM::Base do
+  let(:syncer) { Backup::Syncer::SCM::Base.new }
 
   describe '#initialize' do
 
@@ -13,14 +13,14 @@ describe Backup::Syncer::Repositories::Base do
     end
 
     context 'when setting configuration defaults' do
-      after { Backup::Configuration::Syncer::Repositories::Base.clear_defaults! }
+      after { Backup::Configuration::Syncer::SCM::Base.clear_defaults! }
 
       it 'should use the configured defaults' do
-        Backup::Configuration::Syncer::Repositories::Base.defaults do |default|
+        Backup::Configuration::Syncer::SCM::Base.defaults do |default|
           default.path               = 'some_path'
           #default.directories       = 'cannot_have_a_default_value'
         end
-        syncer = Backup::Syncer::Repositories::Base.new
+        syncer = Backup::Syncer::SCM::Base.new
         syncer.path.should               == 'some_path'
         syncer.repositories.should       == []
       end
@@ -157,7 +157,7 @@ describe Backup::Syncer::Repositories::Base do
         add '/my/other/repo.git'
       end
 
-      Backup::Logger.expects(:message).with("Backup::Syncer::Repositories::Base started syncing 'backups'.")
+      Backup::Logger.expects(:message).with("Backup::Syncer::SCM::Base started syncing 'backups'.")
       syncer.expects(:backup_repository!).with('/my/repo.git')
       syncer.expects(:backup_repository!).with('/my/other/repo.git')
 

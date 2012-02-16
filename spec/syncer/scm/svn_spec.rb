@@ -2,10 +2,10 @@
 
 require File.expand_path('../../../spec_helper.rb', __FILE__)
 
-describe Backup::Syncer::Repositories::SVN do
+describe Backup::Syncer::SCM::SVN do
 
   let(:svn) do
-    Backup::Syncer::Repositories::SVN.new do |svn|
+    Backup::Syncer::SCM::SVN.new do |svn|
       svn.ip        = 'example.com'
       svn.repositories do
         add '/a/repo/trunk'
@@ -22,8 +22,8 @@ describe Backup::Syncer::Repositories::SVN do
     end
   end
 
-  it 'should be a subclass of Repositories::Base' do
-    Backup::Syncer::Repositories::SVN.superclass.should == Backup::Syncer::Repositories::Base
+  it 'should be a subclass of SCM::Base' do
+    Backup::Syncer::SCM::SVN.superclass.should == Backup::Syncer::SCM::Base
   end
 
 
