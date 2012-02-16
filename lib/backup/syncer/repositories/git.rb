@@ -24,23 +24,23 @@ module Backup
           return false
         end
 
-        def clone_repository(repository)
-          Logger.message("Cloning repository in #{repository_local_path(repository)}")
+        def clone_repository!(repository)
+          Logger.message("Cloning repository in '#{repository_local_path(repository)}'.")
           create_repository_local_container(repository)
           run "cd #{repository_local_container_path(repository)} && git clone --bare #{repository_url(repository)}"
         end
 
-        def update_repository(repository)
+        def update_repository!(repository)
           local_path = repository_local_path(repository)
-          Logger.message("Updating repository in #{local_path}")
+          Logger.message("Updating repository in '#{local_path}'.")
           run "cd #{local_path} && git fetch --all"
         end
 
         def backup_repository!(repository)
           if local_repository_exists?(repository)
-            update_repository(repository)
+            update_repository!(repository)
           else
-            clone_repository(repository)
+            clone_repository!(repository)
           end
         end
       end

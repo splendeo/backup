@@ -41,38 +41,38 @@ describe Backup::Syncer::Repositories::Git do
     end
   end
 
-  describe '#clone_repository' do
+  describe '#clone_repository!' do
     it 'initializes an empty repository' do
-      Backup::Logger.expects(:message).with("Cloning repository in backups/my/repo.git")
+      Backup::Logger.expects(:message).with("Cloning repository in 'backups/my/repo.git'.")
       git.expects(:create_repository_local_container).with('/my/repo.git')
       git.expects(:run).with("cd backups/my && git clone --bare git://example.com/my/repo.git")
 
-      git.clone_repository('/my/repo.git')
+      git.clone_repository!('/my/repo.git')
     end
   end
 
-  describe '#update_repository' do
+  describe '#update_repository!' do
     it 'invokes git fetch' do
-      Backup::Logger.expects(:message).with("Updating repository in backups/my/repo.git")
+      Backup::Logger.expects(:message).with("Updating repository in 'backups/my/repo.git'.")
       git.expects(:run).with("cd backups/my/repo.git && git fetch --all")
 
-      git.update_repository('/my/repo.git')
+      git.update_repository!('/my/repo.git')
     end
   end
 
   describe '#backup_repository!' do
     context 'when the local repository exists' do
-      it 'invokes update_repository' do
+      it 'invokes update_repository!' do
         git.expects(:local_repository_exists?).with('/my/repo.git').returns(true)
-        git.expects(:update_repository).with('/my/repo.git')
+        git.expects(:update_repository!).with('/my/repo.git')
 
         git.backup_repository!('/my/repo.git')
       end
     end
     context 'when the local repository does not exist' do
-      it 'invokes clone_repository' do
+      it 'invokes clone_repository!' do
         git.expects(:local_repository_exists?).with('/my/repo.git').returns(false)
-        git.expects(:clone_repository).with('/my/repo.git')
+        git.expects(:clone_repository!).with('/my/repo.git')
 
         git.backup_repository!('/my/repo.git')
       end
